@@ -11,36 +11,36 @@ variables {
     nat_subnets_prefix = "public"
 }
 
-// run "network_expected_failures" {
-//     command = plan
-//     module {
-//         source = "./tests/setup/"
-//     }
-//     variables {
-//         vpc_name       = "eksclustervpc001"
-//         vpc_cidr_block = "192.168.0.0/20"
-//         subnets_name   = ["public-subnet001", "public-subnet002", "private-subnet001", "private-subnet002"]
-//         public_subnet_type    = false
-//         private_subnet_type   = true 
-//         cidr_newbits          = 3
-//         internet_gateway_name = "publicgateway01"
-//         route_table_name   = ["public-rt001", "private-rt001", "private-rt002"]
-//         nat_gateway_name   = ["sub01-natt", "sub02-natt"]
-//         nat_subnets_prefix = "publics"
-//     }
-//     expect_failures = [
-//         var.vpc_name,
-//         var.vpc_cidr_block,
-//         var.subnets_name,
-//         var.public_subnet_type,
-//         var.private_subnet_type,
-//         var.cidr_newbits,
-//         var.internet_gateway_name,
-//         var.route_table_name,
-//         var.nat_gateway_name,
-//         var.nat_subnets_prefix
-//     ]
-// }
+ run "network_expected_failures" {
+     command = plan
+     module {
+         source = "./tests/setup/"
+     }
+     variables {
+         vpc_name       = "eksclustervpc001"
+         vpc_cidr_block = "192.168.0.0/20"
+         subnets_name   = ["public-subnet001", "public-subnet002", "private-subnet001", "private-subnet002"]
+         public_subnet_type    = false
+         private_subnet_type   = true 
+         cidr_newbits          = 3
+         internet_gateway_name = "publicgateway01"
+         route_table_name   = ["public-rt001", "private-rt001", "private-rt002"]
+         nat_gateway_name   = ["sub01-natt", "sub02-natt"]
+         nat_subnets_prefix = "publics"
+     }
+     expect_failures = [
+         var.vpc_name,
+         var.vpc_cidr_block,
+         var.subnets_name,
+         var.public_subnet_type,
+         var.private_subnet_type,
+         var.cidr_newbits,
+         var.internet_gateway_name,
+         var.route_table_name,
+         var.nat_gateway_name,
+         var.nat_subnets_prefix
+     ]
+ }
 
 run "network_unit_testing" {
     command = plan
