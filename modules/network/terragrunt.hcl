@@ -1,6 +1,7 @@
 locals {
-  nat_gateway_allocation_ids = [for i in aws_eip.eip : i.id]
-  collection_of_all_subnets_names_and_ids = {for k in aws_subnet.subnets : k.tags.Name => k.id }
+  nat_gateway_allocation_ids = [
+    for i in aws_eip.eip : i.id
+  ]
   public_route_table      = var.route_table_name[0]
   public_subnets_ids      = [for k in aws_subnet.subnets : k.id if(substr(k.tags.Name, 0, length(var.nat_subnets_prefix)) == var.nat_subnets_prefix)]
   private_subnets_ids     = [for k in aws_subnet.subnets : k.id if(substr(k.tags.Name, 0, length(var.nat_subnets_prefix)) != var.nat_subnets_prefix)]
